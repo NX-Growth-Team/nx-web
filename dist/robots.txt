@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /platform/
+Disallow: /api/
+
+Sitemap: https://www.nxgrowth.ai/sitemap.xml

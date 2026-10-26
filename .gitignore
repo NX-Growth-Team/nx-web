@@ -1,0 +1,30 @@
+# 依赖与构建缓存
+node_modules/
+.npm/
+.cache/
+
+# 运行时数据（server/index.mjs 默认写 /var/lib/nx-api/leads.db）
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+*.log
+
+# 环境变量：部署用的真实配置不进仓库，示例文件保留
+.env
+.env.*
+*.env
+!*.env.example
+
+# 不随仓库分发的原始素材（19MB PNG，页面实际加载 dist/assets/home-green-selected.webp）
+assets-source/home-green-selected.png
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+Desktop.ini
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*~

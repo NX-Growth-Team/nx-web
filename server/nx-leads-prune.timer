@@ -1,0 +1,11 @@
+[Unit]
+Description=Monthly retention sweep for Nx demo requests
+Persistent=true
+
+[Timer]
+OnCalendar=monthly
+RandomizedDelaySec=3600
+AccuracySec=1h
+
+[Install]
+WantedBy=timers.target

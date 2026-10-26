@@ -1,0 +1,23 @@
+[Unit]
+Description=Nx demo request API
+Documentation=https://www.nxgrowth.ai/privacy-policy/
+After=network.target
+
+[Service]
+Type=simple
+User=nx-api
+Group=nx-api
+WorkingDirectory=/srv/nx-api
+Environment=DB_PATH=/var/lib/nx-api/leads.db
+EnvironmentFile=-/etc/nx-api.env
+ExecStart=/usr/bin/node --experimental-sqlite --no-warnings /srv/nx-api/index.mjs
+Restart=always
+RestartSec=2
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/nx-api
+
+[Install]
+WantedBy=multi-user.target
