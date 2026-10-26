@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 远端安装/更新 nx-api 服务本体。由 scripts/deploy-nx-api.sh 上传本目录后，
+# 远端安装/更新 nx-api 服务本体。将本目录上传到服务器后，
 # 在服务器上以 root 执行。幂等：可重复运行，不会覆盖已填好 SMTP 的环境文件。
 
 set -euo pipefail

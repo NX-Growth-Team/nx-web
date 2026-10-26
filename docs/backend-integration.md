@@ -89,4 +89,4 @@ Idempotency-Key: <request UUID>
 
 ## 当前部署状态
 
-2026-10-07 起该接口已在 www.nxgrowth.ai 上线。服务实现位于 `nx-web/server`（Node 内置模块加 nodemailer 一个依赖），由 systemd 守护，nginx 把 `/api/` 反代到本机服务。本文约定的字段校验、`Idempotency-Key` 幂等、按 IP 限流与 24 个月保留期清理均已实现；前端与 `config.js` 无需改动。部署命令 `scripts/deploy-nx-api.sh`，运维细节见 `platform/docs/investor-demo-hosting.md`。
+2026-10-07 起该接口已在 www.nxgrowth.ai 上线。服务实现位于 `nx-web/server`（Node 内置模块加 nodemailer 一个依赖），由 systemd 守护，nginx 把 `/api/` 反代到本机服务。本文约定的字段校验、`Idempotency-Key` 幂等、按 IP 限流与 24 个月保留期清理均已实现；前端与 `config.js` 无需改动。部署时把 `server/` 上传到服务器后执行其中的 `remote-install.sh`（root，可重复执行），环境模板为 `server/nx-api.env.example`，systemd 单元与 nginx 片段同样位于 `server/`。
