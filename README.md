@@ -1,5 +1,7 @@
 # Nx Web
 
+[![CI](https://github.com/NX-Growth-Team/nx-web/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/NX-Growth-Team/nx-web/actions/workflows/ci.yml)
+
 [简体中文](README_zh-CN.md) | English
 
 Standalone frontend built from the Nx Figma design. Plain HTML, CSS and JavaScript — no third-party runtime dependencies, no build step. The code can be handed directly to a vendor to wire up their own backend and deployment environment.
