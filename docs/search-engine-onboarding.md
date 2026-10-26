@@ -7,21 +7,31 @@
 
 - 密钥：`4e7babb82ba0fd86f9dc9c0c29a0d340`
 - 密钥文件：站点根 `/4e7babb82ba0fd86f9dc9c0c29a0d340.txt`（内容即密钥，
-  **必须持续可访问**，已入库 `nx-web/dist/`，随部署常驻）
+  **必须持续可访问**，已入库 `dist/`，随部署常驻）
 - 2026-10-07 已推送 3 条 URL（`/`、`/contact/`、`/privacy-policy/`）到
   `api.indexnow.org`，返回 202。
 - IndexNow 是 Bing / Yandex / Naver / Seznam 共享协议；**Bing 的索引同时
   供给 ChatGPT 搜索**。
 
-日后新增页面时的推送命令（URL 加进 sitemap.xml 后）：
+日后新增页面时的推送命令（URL 加进 sitemap.xml 后），用 curl 直接 POST，
+不需要额外脚本：
 
 ```bash
-"C:/Users/bicho/.workbuddy/binaries/node/versions/22.22.2-6/node.exe" \
-  "C:/Users/bicho/.workbuddy/skills/seo-check-push/scripts/indexnow.mjs" \
-  --host www.nxgrowth.ai \
-  --key 4e7babb82ba0fd86f9dc9c0c29a0d340 \
-  --sitemap
+curl -s -X POST https://api.indexnow.org/indexnow \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "host": "www.nxgrowth.ai",
+    "key": "4e7babb82ba0fd86f9dc9c0c29a0d340",
+    "keyLocation": "https://www.nxgrowth.ai/4e7babb82ba0fd86f9dc9c0c29a0d340.txt",
+    "urlList": [
+      "https://www.nxgrowth.ai/",
+      "https://www.nxgrowth.ai/contact/",
+      "https://www.nxgrowth.ai/privacy-policy/"
+    ]
+  }'
 ```
+
+返回 200 或 202 即提交成功。
 
 ## 待办：Google Search Console（需账号操作）
 
@@ -32,7 +42,7 @@ Google 不支持 IndexNow，必须走站长平台。
    - **推荐：网域（Domain）属性**，填 `nxgrowth.ai`，用 DNS TXT 记录验证
      （域名 DNS 面板加一条 TXT，不动站点文件）。
    - 备选：网址前缀 `https://www.nxgrowth.ai/`，选「HTML 文件」验证，
-     把下载到的 `googleXXXXXXXX.html` 交给部署方放进 `nx-web/dist/`
+     把下载到的 `googleXXXXXXXX.html` 交给部署方放进 `dist/`
      部署即可。
 3. 验证通过后，在「站点地图」提交：`https://www.nxgrowth.ai/sitemap.xml`。
 
@@ -61,7 +71,7 @@ Google 不支持 IndexNow，必须走站长平台。
 1. 打开 https://www.bing.com/webmasters ，登录（支持从 GSC 一键导入站点，
    若已做 GSC 推荐直接导入）。
 2. 手动验证的话选「XML 文件」方式，把 `BingSiteAuth.xml` 交给部署方放进
-   `nx-web/dist/` 部署。
+   `dist/` 部署。
 3. 提交站点地图：`https://www.nxgrowth.ai/sitemap.xml`。
    IndexNow 通道已打通（上方密钥），站长工具主要用来查看收录报表与
    关键词数据。
@@ -103,7 +113,7 @@ https://ziyuan.baidu.com 的链接提交。
 ## 2026-10-19 域名规范化核查
 
 - robots.txt、sitemap.xml、canonical、og:url 与 JSON-LD 的 url 全部已是
-  `https://www.nxgrowth.ai`，线上返回与仓库 `nx-web/dist/` 一致，无需修改。
+  `https://www.nxgrowth.ai`，线上返回与仓库 `dist/` 一致，无需修改。
 - nginx 新增裸域 443 server 块并热加载；`nginx -t` 通过。
 - 实测结果：`http://nxgrowth.ai/`、`https://nxgrowth.ai/`、
   `https://nxgrowth.ai/platform/telemetry/` 均 301 到 www 同路径；
